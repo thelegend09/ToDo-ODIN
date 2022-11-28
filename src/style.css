@@ -19,6 +19,11 @@ body {
     font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+.icon {
+    cursor: pointer;
+    user-select: none;
+}
+
 /* nav bar */
 nav {
     display: flex;
@@ -29,23 +34,24 @@ nav {
     padding: 0.2rem;
 }
 
-.icon {
+nav .icon {
     font-size: 16pt;
     color: white;
     margin: 0.25rem;
     padding: 0.25rem;
 }
 
-.icon:hover {
+nav .icon:hover {
     transition: 250ms;
     background-color: #e27065;
     cursor: pointer;
+    user-select: none;
 }
 
 
 
-.right-group,
-.left-group {
+nav .right-group,
+nav .left-group {
     display: flex;
     align-items: center;
 }
@@ -92,7 +98,7 @@ nav {
 }
 
 .search-bar:hover input {
- color: black;   
+    color: black;
 }
 
 .search-bar:hover input::placeholder {
@@ -103,11 +109,125 @@ nav {
 main {
     margin-left: auto;
     margin-right: auto;
-    width: 25vw;
+    width: 50vw;
     padding-top: 36px;
 }
 
 .title1 {
     font-size: 20px;
     font-weight: 700;
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 36px;
+}
+
+/* tasks container */
+.tasks-container {
+    padding-top: 2rem;
+}
+
+/* individual tasks*/
+.task {
+    list-style-type: none;
+    padding: 1em 0;
+    border-bottom: 1px solid lightgray;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+
+.task .status {
+    padding-right: 0.5rem;
+    padding-top: 0.2rem;
+}
+
+.task .name {
+    justify-self: left;
+}
+
+/* drag indicator */
+.task .move {
+    color: lightgray;
+    position: absolute;
+    left: -1.5rem;
+    opacity: 0;
+    transition: 200ms;
+}
+
+.task:hover .move {
+    opacity: 1;
+}
+
+.task:hover .move:hover {
+    color: gray;
+    /* background-color: rgb(236, 236, 236); */
+    border-radius: 5px;
+}
+
+/* actions icons */
+.task .actions {
+    position: absolute;
+    /* top:0; */
+    right: 0;
+    display: flex;
+    gap: 0.5em;
+    color: lightgray;
+    opacity: 0;
+    font-size: 0.8rem;
+    transition: 200ms;
+}
+
+.task:hover .actions {
+    opacity:1;
+}
+
+.task:hover .actions span:hover {
+    color: gray;
+    /* background-color: rgb(236, 236, 236); */
+    border-radius: 5px;
+}
+
+
+
+.task:hover .actions .delete:active {
+    color:red;
+    transition: 125ms;
+}
+
+/* status */
+.task .status {
+    user-select: none;
+    cursor: pointer;
+}
+
+.status button {
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+
+.status svg {
+    display: inline;
+    color: black;
+    /* position: absolute; */
+    
+    height: auto;
+    width: 32px;
+    transition: opacity .15s;
+    pointer-events: none;
+    opacity: 1;
+    z-index: 100;
+
+}
+
+.status button:hover svg {
+    opacity: 1;
+}
+
+
+
+.add-task {
+    padding-top: 1em;
 }
