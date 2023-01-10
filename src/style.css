@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@200;400;500;800&display=swap');
 
+@import "/node_modules/open-props/open-props.min.css";
 
 /* TOC 
 
@@ -9,14 +11,46 @@ search bar - hover
 
 
 */
-
 * {
     box-sizing: border-box;
 }
 
+:root {
+    --main-color: #db4c3f;
+    --main-color-darker: #b03d32;
+    --gray: var(--gray-6);
+    --light-gray: var(--gray-4);
+    --lighter-gray: var(--gray-3):
+}
+
+a {
+    text-decoration: none;
+    color: currentColor;
+}
+
+
+ul {
+    padding-left: 0;
+}
+
+li {
+    list-style-type: none;
+}
+
+.material-symbols-outlined {
+    font-variation-settings:
+        'FILL'0,
+        'wght'400,
+        'GRAD'0,
+        'opsz'48
+}
+
+
 body {
     margin: 0;
-    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: "Lexend", "Inter", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 15px;
+    letter-spacing: 0.1pt;
 }
 
 .icon {
@@ -30,7 +64,7 @@ nav {
     justify-content: space-between;
     height: 100%;
     width: 100%;
-    background-color: #db4c3f;
+    background-color: var(--main-color);
     padding: 0.2rem;
 }
 
@@ -109,14 +143,14 @@ nav .left-group {
 main {
     margin-left: auto;
     margin-right: auto;
-    width: 50vw;
+    width: clamp(45ch, 50%, 75ch);
     padding-top: 36px;
 }
 
 .title1 {
     font-size: 20px;
     font-weight: 700;
-    border-bottom: 1px solid lightgray;
+    border-bottom: 1px solid var(--light-gray);
     padding-bottom: 36px;
 }
 
@@ -127,9 +161,8 @@ main {
 
 /* individual tasks*/
 .task {
-    list-style-type: none;
     padding: 1em 0;
-    border-bottom: 1px solid lightgray;
+    border-bottom: 1px solid var(--light-gray);
     display: flex;
     align-items: center;
     position: relative;
@@ -147,7 +180,7 @@ main {
 
 /* drag indicator */
 .task .move {
-    color: lightgray;
+    color: var(--light-gray);
     position: absolute;
     left: -1.5rem;
     opacity: 0;
@@ -159,9 +192,9 @@ main {
 }
 
 .task:hover .move:hover {
-    color: gray;
-    /* background-color: rgb(236, 236, 236); */
+    color: var(--gray);
     border-radius: 5px;
+    cursor: move;
 }
 
 /* actions icons */
@@ -171,26 +204,25 @@ main {
     right: 0;
     display: flex;
     gap: 0.5em;
-    color: lightgray;
+    color: var(--light-gray);
     opacity: 0;
     font-size: 0.8rem;
     transition: 200ms;
 }
 
 .task:hover .actions {
-    opacity:1;
+    opacity: 1;
 }
 
 .task:hover .actions span:hover {
-    color: gray;
-    /* background-color: rgb(236, 236, 236); */
+    color: var(--gray);
     border-radius: 5px;
 }
 
 
 
 .task:hover .actions .delete:active {
-    color:red;
+    color: red;
     transition: 125ms;
 }
 
@@ -208,26 +240,165 @@ main {
 }
 
 
-.status svg {
-    display: inline;
-    color: black;
-    /* position: absolute; */
-    
-    height: auto;
-    width: 32px;
-    transition: opacity .15s;
-    pointer-events: none;
-    opacity: 1;
-    z-index: 100;
 
-}
-
-.status button:hover svg {
-    opacity: 1;
-}
-
-
+/* add task */
 
 .add-task {
+    padding: 1em 0;
+    display: flex;
+    justify-content: stretch;
+    width: 100%;
+    align-items: center;
+}
+
+.add-task .icon {
+    padding-right: 0.4em;
+}
+
+.add-task input {
+    background-color: transparent;
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+}
+
+/* add task form */
+.add-class-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.add-class-form .form-editing-area {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--light-gray);
+    padding: 1em;
+    border-radius: 15px;
+}
+
+.add-class-form .form-editing-area:focus-within {
+    border: 1px solid var(--gray);
+
+}
+
+.add-class-form .form-task-name {
+    color: black;
+    border: none;
+    outline: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    padding-bottom: 0.5rem;
+}
+
+.add-class-form .form-task-description {
+    color: black;
+    border: none;
+    outline: none;
+    font-size: 0.8rem;
+    padding-bottom: 0.5rem;
+}
+
+.add-class-form .form-task-name::placeholder,
+.add-class-form .form-task-description::placeholder {
+    color: var(--gray);
+}
+
+.add-class-form .bottom-row-inner {
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-class-form .project-name {
+    font-size: 0.8rem;
+    padding: 0.2em 0.8em;
+    border-radius: 5px;
+    border: 1px solid var(--light-gray);
+}
+
+.add-class-form .project-name:hover {
+    background-color: var(--light-gray);
+}
+
+
+.add-class-form .project-name::before {
+    content: "⬤";
+    color: coral;
+    font-size: 0.9rem;
+    padding-right: 0.5ch;
+}
+
+.icon.flag {
+    color: var(--light-gray);
+}
+
+.icon.flag:hover {
+    color: var(--gray);
+}
+
+.material-symbols-outlined.filled {
+    font-variation-settings:
+        'FILL'1,
+        'wght'400,
+        'GRAD'0,
+        'opsz'48
+}
+
+
+.add-class-form .bottom-row-outer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.bottom-row-outer {
     padding-top: 1em;
+}
+
+.bottom-row-outer a {
+    display: flex;
+    align-items: center;
+    gap: 1ch;
+}
+
+.buttons .btn-cancel,
+.buttons .btn-add-task {
+    border: none;
+    padding: 0.6em 1em;
+    margin: 0 0.1em;
+    border-radius: 5px;
+
+}
+
+.buttons .btn-cancel {
+    background-color: var(--gray-1);
+}
+
+.buttons .btn-cancel:hover {
+    background-color: var(--gray-3);
+}
+
+.buttons .btn-add-task {
+    background-color: var(--main-color);
+    color: white;
+}
+
+.buttons .btn-add-task:hover {
+    background-color: var(--main-color-darker);
+    color: white;
+}
+
+
+
+
+.bottom-row-outer .feedback {
+    font-size: 0.8rem;
+    color: var(--gray);
+    font-weight: bold;
+}
+
+.feedback .editor-feedback:hover {
+    text-decoration: underline;
 }
